@@ -18,17 +18,17 @@ class App extends Component {
       <BrowserRouter>
 
         <Nav />
-
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/Favorites" component={Favorites} />
-          <Route path="/Popular" component={Popular} />
-          <Route path="/PopularBattle" component={PopularBattle} />
-          <Route path="/Weekly" component={Weekly} />
-          <Route path="/WeeklyBattle" component={WeeklyBattle} />
-          <Route path="*" component={NotFound} />
-        </Switch>
-        
+        <div className="container">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/Favorites" component={Favorites} />
+            <Route path="/Popular" component={Popular} />
+            <Route path="/PopularBattle" component={PopularBattle} />
+            <Route path="/Weekly" component={Weekly} />
+            <Route path="/WeeklyBattle" component={WeeklyBattle} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </div>
       </BrowserRouter>
     )
   }

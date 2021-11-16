@@ -8,8 +8,10 @@ class PopularBattle extends Component {
 
         this.state = {
             movies: [],
-            currentBattle: 0
+            currentBattle: 0,
+            id: []
         }
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -18,24 +20,49 @@ class PopularBattle extends Component {
         .then(data => {
           this.setState({ movies: data.results })
         })
+        
     }
+
+    handleClick(id) {
+        let favorites = localStorage.getItem("favorite")
+
+        if (!favorites) {
+            favorites = localStorage.setItem("favorite", JSON.stringify([id])) 
+        } else {
+            favorites = JSON.parse(favorites)
+            favorites = [...favorites, id]
+            favorites = localStorage.setItem("favorite", JSON.stringify(favorites))
+        }
+        
+        this.setState({ 
+            currentBattle: this.state.currentBattle + 2,
+        })
+        console.log(this.state.currentBattle)
+    }
+
     render() {
-        const { movies } = this.state
-        const battle = movies.filter((battle, index) => index > 2)
-        console.log(battle)
+        const { movies, currentBattle } = this.state
+        const topMovies = movies.filter((topMovie, index) => 
+        index === currentBattle || index === currentBattle + 1
+        )
         return (
-            <div className="d-flex">
-                    {battle.map(movie => (
-                        <Card
-                            key={movie.id}
-                            poster={movie.poster_path}
-                            title={movie.original_title}
-                            date={movie.release_date}
-                            overview={movie.overview}
-                        />
+            <>
+                <h1>Popular battle</h1>
+                <div className="d-flex flex-wrap justify-content-center mt-5">
+                    {topMovies.map(movie => (
+                        <div className="container col-6" onClick={() => this.handleClick(movie.id)} key={`Popular battle movie ${movie.id}`}>
+                            <Card
+                                poster={movie.poster_path}
+                                title={movie.original_title}
+                                date={movie.release_date}
+                                overview={movie.overview}
+                            />
+                        </div>
                     ))}
-            </div>
+                </div>
+            </>
         )}
+        
 }
 
 export default PopularBattle;

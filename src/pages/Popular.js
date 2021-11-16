@@ -22,16 +22,22 @@ class Popular extends Component {
     render() {
         const { movies } = this.state
         return (
-            <div className="container">
-                {movies.map(movie => (
-                <Card
-                    key={movie.id}
-                    poster={movie.poster_path}
-                    title={movie.original_title}
-                    date={movie.release_date}
-                    overview={movie.overview}
-                />
-                ))}
+            <div>
+                <h1>Popular</h1>
+                    <div className="d-flex flex-wrap">
+                        {/* <div className=""> */}
+                            {movies.map(movie => (
+                                <div className="container col-4 py-2" key={`Popular movie ${movie.id}`}>
+                                    <Card
+                                        
+                                        poster={movie.poster_path}
+                                        title={movie.original_title}
+                                        date={movie.release_date}
+                                        overview={movie.overview}
+                                    />
+                                </div>
+                            ))}
+                    </div>
             </div>
         );
     }
