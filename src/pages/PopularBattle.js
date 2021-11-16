@@ -49,17 +49,21 @@ class PopularBattle extends Component {
             <>
                 <h1>Popular battle</h1>
                 <div className="d-flex flex-wrap justify-content-center mt-5">
-                    {topMovies.map(movie => (
-                        <div className="container col-6" onClick={() => this.handleClick(movie.id)} key={`Popular battle movie ${movie.id}`}>
-                            <Card
-                                poster={movie.poster_path}
-                                title={movie.original_title}
-                                date={movie.release_date}
-                                overview={movie.overview}
-                            />
-                        </div>
-                    ))}
-                </div>
+                {currentBattle < 20 ? (
+                        topMovies.map(movie => (
+                            <div className="container col-6" onClick={() => this.handleClick(movie.id)} key={`Popular battle movie ${movie.id}`}>
+                                <Card
+                                    poster={movie.poster_path}
+                                    title={movie.original_title}
+                                    date={movie.release_date}
+                                    overview={movie.overview}
+                                />
+                            </div>
+                        ))
+                ) : (
+                    <p>Vous avez parcouru tous les films !</p>
+                )}
+                </div> 
             </>
         )}
         
