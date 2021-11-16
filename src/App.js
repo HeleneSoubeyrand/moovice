@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from "react-router-dom"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import Home from './pages/Home'
+import Favorites from './pages/Favorites'
+import Popular from './pages/Popular'
+import PopularBattle from './pages/PopularBattle'
+import Weekly from './pages/Weekly'
+import WeeklyBattle from './pages/WeeklyBattle'
+import NotFound from './pages/NotFound'
+import Nav from './components/Nav'
+
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+
+        <Nav />
+
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/Favorites" component={Favorites} />
+          <Route path="/Popular" component={Popular} />
+          <Route path="/PopularBattle" component={PopularBattle} />
+          <Route path="/Weekly" component={Weekly} />
+          <Route path="/WeeklyBattle" component={WeeklyBattle} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+        
+      </BrowserRouter>
+    )
+  }
 }
 
 export default App;
